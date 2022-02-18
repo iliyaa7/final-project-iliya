@@ -2,7 +2,7 @@ post http://localhost:3000/signup
 Content-Type: application/json
 
 {
-  "email": "iliyaaaa7@gmail.com",
+  "email": "aa7@gmail.com",
   "password": "5792",
   "name": "iliya"
 }
@@ -20,16 +20,16 @@ Content-Type: application/json
 ###
 
 get http://localhost:3000/articles
-Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2MjBiMmEwNDQ0ZDk3NjgxNmRiZDliMDUiLCJpYXQiOjE2NDQ5MzIzMDMsImV4cCI6MTY0NTUzNzEwM30.EW8lbLDD70mKUzP4gCquHAVDpWep9_brMPvatImIc8I
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2MjBhZjg1MmQxNGFmM2I1ZGViYTI4YTIiLCJpYXQiOjE2NDUxNDMzNTgsImV4cCI6MTY0NTc0ODE1OH0.-pwcGSOIIUhU-V5cDXG9pVM35NirYQYPbOhgj7If5sk
 
 ###
 
 post http://localhost:3000/articles
 Content-Type: application/json
-Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2MjBiMmEwNDQ0ZDk3NjgxNmRiZDliMDUiLCJpYXQiOjE2NDQ5MzIzMDMsImV4cCI6MTY0NTUzNzEwM30.EW8lbLDD70mKUzP4gCquHAVDpWep9_brMPvatImIc8I
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2MjBhZjg1MmQxNGFmM2I1ZGViYTI4YTIiLCJpYXQiOjE2NDUxNDMzNTgsImV4cCI6MTY0NTc0ODE1OH0.-pwcGSOIIUhU-V5cDXG9pVM35NirYQYPbOhgj7If5sk
 
 {
-  "keyword": "afsas",
+  "keyword": "sadddd",
   "title": "israel",
   "text": "israel",
   "date": "israel",
@@ -39,8 +39,8 @@ Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2MjBiMmEwN
 }
 ###
 
-delete http://localhost:3000/articles/620bace713d1ad594abbac3!
-Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2MjBiMmEwNDQ0ZDk3NjgxNmRiZDliMDUiLCJpYXQiOjE2NDQ5MzIzMDMsImV4cCI6MTY0NTUzNzEwM30.EW8lbLDD70mKUzP4gCquHAVDpWep9_brMPvatImIc8I
+delete http://localhost:3000/articles/620e9cc61dd16d8857f2314
+Authorization: Bearer yJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2MjBiYWI1OGQ4Yjg1ZGIzNzBiNGVjMTIiLCJpYXQiOjE2NDUxMjQ3NTksImV4cCI6MTY0NTcyOTU1OX0.Vwop4VI5UlOv9b5sV5u-LlLeDI4YM8RiDNL9ihNMcXg
 
 ###
 

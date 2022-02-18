@@ -5,7 +5,7 @@ const InvalidDataError = require('../errors/invalid-data-err');
 const NotFoundArticleError = new NotFoundError('No article found with that id');
 
 module.exports.getArticles = (req, res, next) => {
-  Article.find({})
+  Article.find({ owner: req.user._id })
     .then((articles) => res.send(articles))
     .catch(next);
 };

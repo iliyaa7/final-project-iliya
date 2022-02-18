@@ -46,12 +46,11 @@ const articleSchema = new mongoose.Schema({
     type: mongoose.Schema.Types.ObjectId,
     ref: 'user',
     required: true,
-    select: false,
   },
 });
 
 articleSchema.statics.isOwensArticle = function isOwensArticle(owner, _id) {
-  return this.findById({ _id }).select('+owner')
+  return this.findById({ _id })
     .orFail(() => {
       throw new NotFoundError('No article found with that id');
     })

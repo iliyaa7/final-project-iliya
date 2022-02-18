@@ -1,0 +1,51 @@
+post http://localhost:3000/signup
+Content-Type: application/json
+
+{
+  "email": "aa7@gmail.com",
+  "password": "5792",
+  "name": "iliya"
+}
+
+###
+
+post http://localhost:3000/signin
+Content-Type: application/json
+
+{
+  "email": "iliyaa7@gmail.com",
+  "password": "5792"
+}
+
+###
+
+get http://localhost:3000/articles
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2MjBhZjg1MmQxNGFmM2I1ZGViYTI4YTIiLCJpYXQiOjE2NDUxNDMzNTgsImV4cCI6MTY0NTc0ODE1OH0.-pwcGSOIIUhU-V5cDXG9pVM35NirYQYPbOhgj7If5sk
+
+###
+
+post http://localhost:3000/articles
+Content-Type: application/json
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2MjBhZjg1MmQxNGFmM2I1ZGViYTI4YTIiLCJpYXQiOjE2NDUxNDMzNTgsImV4cCI6MTY0NTc0ODE1OH0.-pwcGSOIIUhU-V5cDXG9pVM35NirYQYPbOhgj7If5sk
+
+{
+  "keyword": "sadddd",
+  "title": "israel",
+  "text": "israel",
+  "date": "israel",
+  "source": "israel",
+  "link": "https://code.s3.yandex.net/web-code/bald-mountains.jpg",
+  "image": "https://code.s3.yandex.net/web-code/bald-mountains.jpg"
+}
+###
+
+delete http://localhost:3000/articles/620e9cc61dd16d8857f2314
+Authorization: Bearer yJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2MjBiYWI1OGQ4Yjg1ZGIzNzBiNGVjMTIiLCJpYXQiOjE2NDUxMjQ3NTksImV4cCI6MTY0NTcyOTU1OX0.Vwop4VI5UlOv9b5sV5u-LlLeDI4YM8RiDNL9ihNMcXg
+
+###
+
+
+get http://localhost:3000/users/me
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2MjBiMWU4OGM3NzdjZmM4ZjBkNmQ4YjYiLCJpYXQiOjE2NDQ4OTY3MjgsImV4cCI6MTY0NTUwMTUyOH0.4iYJRsE1R7xtLXgo2gyKvKsBGOAYepRn6SyWjTWbZ5U
+
+###

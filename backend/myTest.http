@@ -2,9 +2,9 @@ post http://localhost:3000/signup
 Content-Type: application/json
 
 {
-  "email": "aa7@gmail.com",
+  "email": "adfaah7@gmail.com",
   "password": "5792",
-  "name": "iliya"
+  "name": "hdf"
 }
 
 ###

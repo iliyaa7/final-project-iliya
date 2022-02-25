@@ -1,6 +1,7 @@
 import React from 'react';
 // import { Switch, Route, Redirect } from 'react-router-dom';
 import '../index.css';
+import './App.css'
 import Header from './Header.js'
 import SearchForm from './SearchForm';
 import PopupNav from './PopupNav';
@@ -8,11 +9,13 @@ import PopupAuth from './PopupAuth';
 import Footer from './Footer';
 import AboutAuthor from './AboutAuthor';
 import Preloader from './Preloader';
-import newsApi from '../utils/api';
-import NewsCardsList from './NewCardsList';
+import searchNewsApi from '../utils/searchNewsApi';
+import savedNewsApi from '../utils/savedNewsApi'
+import NewsCardsList from './NewsCardsList';
 import ProtectedRoute from './ProtectedRoute';
 import { Switch, Route } from 'react-router';
 import SavedNewsHeader from './SavedNewsHeader';
+import InfoTooltip from './InfoTooltip';
 
 function App() {
 
@@ -23,15 +26,67 @@ function App() {
   const [notFound, setNotFound] = React.useState(false);
   const [cardsToRender, setCardsToRender] = React.useState(false)
   const [nCardsToRender, setNCardsToRender] = React.useState(3);
-  const [isLoggedIn, setIsLoggedIn] = React.useState(true);
-  const [userName, setUserName] = React.useState('Iliya');
+  const [isLoggedIn, setIsLoggedIn] = React.useState(false);
+  const [userName, setUserName] = React.useState('');
   const [savedCards, setSavedCards] = React.useState([])
+  const [isInfoPopupOpened, setIstInfoPopupOpened]= React.useState(false);
 
   React.useEffect(() => {
-    newsApi.getArticles('israel')
+    searchNewsApi.getArticles('israel')
       .then((res) => setSavedCards(res.articles))
       .catch((err) => console.log(err));
   }, [])
+
+  React.useEffect(() => {
+    savedNewsApi.getUserInfo(localStorage.getItem('token'))
+    .then(() => {
+      setIsLoggedIn(true);
+    })
+    .then(() => {
+      savedNewsApi.getUserInfo(localStorage.getItem('token'))
+      .then((res) => {
+        setUserName(res.name);
+      })
+    })
+    .then(() => {
+      savedNewsApi.getArticles(localStorage.getItem('token'))
+      .then((res) => {
+        console.log(res);
+        // setSavedCards(res);
+      })
+    })
+    .catch((err) => console.log(err));
+  }, [])
+
+
+  function handleSignin(newUserData) {
+    savedNewsApi.signin(newUserData)
+    .then((res) => {
+      localStorage.setItem('token', res.token);
+    })
+    .then(() => {
+      savedNewsApi.getUserInfo(localStorage.getItem('token')).then((res) => {
+        setUserName(res.name)
+        setIsLoggedIn(true);
+        setIsPopupSigninOpen(false)
+      })
+    })
+    .catch((err) => {
+      console.log(err);
+  });
+  }
+
+  function handleRegister(UserData) {
+    savedNewsApi.signup(UserData)
+    .then((res) => {
+      console.log(res);
+      setIsPopupSignupOpen(false);
+      setIstInfoPopupOpened(true);
+    })
+    .catch((err) => {
+      console.log(err);
+    });
+  }
 
   function showMoreCards() {
     setNCardsToRender(nCardsToRender + 3);
@@ -40,7 +95,7 @@ function App() {
   function handleSearchSubmit(searchData) {
     setNotFound(false);
     setIsSearching(true);
-    newsApi.getArticles(searchData)
+    searchNewsApi.getArticles(searchData)
       .then((res) => {
         if (res.articles.length === 0) {
           setIsSearching(false);
@@ -61,8 +116,7 @@ function App() {
   }
 
   function handleOpenPopupSignin() {
-    setIsPopupSignupOpen(false);
-    setIsPopupNavOpen(false);
+    closePopups();
     setIsPopupSigninOpen(true);
   }
 
@@ -79,18 +133,21 @@ function App() {
     setIsPopupNavOpen(false);
     setIsPopupSigninOpen(false);
     setIsPopupSignupOpen(false);
+    setIstInfoPopupOpened(false);
   }
 
   function handleLogout() {
     setIsLoggedIn(false);
+    localStorage.removeItem('token');
     closePopups();
   }
 
 
   return (
     <div className='bodyy'>
-      <PopupAuth isOpen={isPopupSigninOpen} onClose={closePopups} title={'Sign in'} submitBtnTitle={'Sign in'} isRegister={false} redirectBtn={'Sign up'} handleRedirect={handleOpenPopupSignup}/>
-      <PopupAuth isOpen={isPopupSignupOpen} onClose={closePopups} title={'Sign up'} submitBtnTitle={'Sign up'} isRegister={true} redirectBtn={'Sign in'} handleRedirect={handleOpenPopupSignin}/>
+      <PopupAuth isOpen={isPopupSigninOpen} handleSignin={handleSignin} onClose={closePopups} title={'Sign in'} submitBtnTitle={'Sign in'} isRegister={false} redirectBtn={'Sign up'} handleRedirect={handleOpenPopupSignup}/>
+      <PopupAuth isOpen={isPopupSignupOpen} handleRegister={handleRegister} onClose={closePopups} title={'Sign up'} submitBtnTitle={'Sign up'} isRegister={true} redirectBtn={'Sign in'} handleRedirect={handleOpenPopupSignin}/>
+      <InfoTooltip handleRedirect={handleOpenPopupSignin} isOpen={isInfoPopupOpened} onClose={closePopups}/>
       <PopupNav userName={userName} isLoggedIn={isLoggedIn} handleLogout={handleLogout} isOpen={isPopupNavOpen} onClose={closePopups} handleOpenPopupSignin={handleOpenPopupSignin}/>
       <Switch>
         <ProtectedRoute loggedIn={isLoggedIn} path='/saved-news'>

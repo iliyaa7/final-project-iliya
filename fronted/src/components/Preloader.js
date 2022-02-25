@@ -1,5 +1,6 @@
 import searchingPath from '../images/Ellipse.png'
 import notFoundPath from '../images/not-found.png'
+import './Preloader.css'
 
 function Preloader(props) {
 

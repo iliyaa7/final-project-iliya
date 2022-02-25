@@ -1,0 +1,116 @@
+.bodyy {
+  width: 100vw;
+  max-width: 100%;
+  min-height: 100vh;
+  background-color: white;
+  margin: 0;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.upper-container {
+  width: 100%;
+  max-width: 100%;
+  height: 576px;
+  background-image: url('../images/background-image.png');
+  background-repeat: no-repeat;
+  background-size: cover;
+  background-position: center;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.upper-container__heading {
+  margin: 80px 0 0;
+  font-family: Roboto Slab, serif, sans-serif;
+  font-style: normal;
+  font-weight: 400;
+  font-size: 60px;
+  line-height: calc(64 / 60);
+  color: #FFFFFF;
+  max-width: 608px;
+}
+
+.upper-container__subtitle {
+  font-family: Roboto, serif, sans-serif;
+  font-style: normal;
+  font-weight: 400;
+  font-size: 18px;
+  line-height: calc (24 / 18);
+  color: #FFFFFF;
+  max-width: 608px;
+  margin: 32px 0 0;
+}
+
+
+
+@media only screen and (max-width: 768px){
+  .upper-container {
+    height: 400px;
+  }
+
+  .upper-container__heading {
+    margin: 38px 28.64% 0 21.22%;
+    font-size: 36px;
+    line-height: calc(40 / 36);
+    max-width: 385px;
+  }
+
+  .upper-container__subtitle {
+    max-width: 452px;
+    margin: 16px 20.31% 0 20.83%;
+  }
+}
+
+
+
+@media only screen and (max-width: 561px){
+  .upper-container {
+    min-height: 400px;
+  }
+
+  .upper-container__heading {
+    min-height: 80px;
+    margin: 38px 0 0;
+    text-align: center;
+  }
+
+  .upper-container__subtitle {
+    min-height: 48px;
+    margin: 16px 0 0;
+    text-align: center;
+  }
+}
+
+
+
+@media only screen and (max-width: 347px){
+  .upper-container {
+    min-height: 536px;
+    background-position: center;
+    background-size: cover;
+  }
+
+  .upper-container__heading {
+    margin: 30px 16px 0 19px;
+    font-size: 36px;
+    line-height: calc(40 / 36);
+    max-width: 285px;
+  }
+
+  .upper-container__subtitle {
+    margin-top: 5.55%;
+    max-width: 288px;
+  }
+
+}
+
+
+
+@media only screen and (max-width: 310px){
+  .upper-container {
+    min-height: 600px;
+  }
+}

@@ -1,4 +1,5 @@
 import React from 'react';
+import './SearchForm.css'
 
 function SearchForm(props) {
   const [newsToSearch, setNewsToSearch] = React.useState('');;

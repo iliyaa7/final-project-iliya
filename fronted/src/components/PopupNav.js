@@ -1,6 +1,7 @@
 import React from 'react';
 import Header from './Header';
 import Nav from './Nav';
+import './PopupNav.css'
 
 function PopupWithForm(props) {
   return (

@@ -1,7 +1,8 @@
 import React from "react";
-import trashPath from '../images/trash.png'
+import './Card.css';
 
 function Card(props) {
+  const [isBtnClick, setIsBtnClick] = React.useState(false)
 
   // const user = React.useContext(CurrentUserContext);
   // const isOwn = props.card.owner === user._id;
@@ -14,6 +15,10 @@ function Card(props) {
   // );
 
 
+  function handleFavoriteClick() {
+    setIsBtnClick(!isBtnClick);
+  }
+
   const articleDate = new Date(props.card.publishedAt);
   const month = ["January", "February", "March", "April", "May", "June",
   "July", "August", "September", "October", "November", "December"][articleDate.getMonth()];
@@ -23,11 +28,11 @@ function Card(props) {
 
   return (
     <div className="card">
-      {!props.isSavedNews && <button className='card__button card__button_type_favorite'/>}
+      {!props.isSavedNews && <button onClick={handleFavoriteClick} className={`card__button ${isBtnClick ? 'card__button_type_favorite_active' :' card__button_type_favorite'}`} disabled={!props.isLoggedIn}/>}
       {props.isSavedNews && <button className='card__button card__button_type_delete'/>}
       {props.isSavedNews && <p className='card__keyword'>Nature</p>}
       {props.isSavedNews ? <p className='card__hover-elemnt'>Remove from saved</p> : !props.isLoggedIn && <p className='card__hover-elemnt'>Sign in to save articles</p> }
-      <a className='card__link card__link_type_image57' href={props.card.url} target="_blank" rel='noreferrer'>
+      <a className='card__link card__link_type_image' href={props.card.url} target="_blank" rel='noreferrer'>
         <img  src={props.card.urlToImage} alt={`A pic of the article`} className="card__image"/>
       </a>
       <div className='card__bottom-container'>

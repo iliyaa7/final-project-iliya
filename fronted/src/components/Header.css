@@ -1,0 +1,96 @@
+@import url('./PopupWithForm.css');
+@import url('./PopupNav.css');
+
+.header {
+  width: 100%;
+  max-width: 100%;
+  height: 80px;
+  display: flex;
+  justify-content: space-between;
+  box-shadow: inset 0px -1px 0px rgba(255, 255, 255, 0.2);
+  margin: 0 auto;
+}
+
+.header_type_black {
+  box-shadow: inset 0px -1px 0px #D1D2D6;
+}
+
+.header__heading {
+  font-family: Roboto Slab, serif, sans-serif;
+  font-style: normal;
+  font-weight: 700;
+  font-size: 20px;
+  line-height: calc(24 / 20);
+  color: white;
+  margin: auto auto 26px 7.22%;
+}
+
+.header__heading_type_black{
+  color: #1A1B22;
+}
+
+.header__menu-button {
+  width: 24px;
+  height: 24px;
+  margin: 16px 16px 16px auto;
+  background-color: transparent;
+  cursor: pointer;
+  border: none;
+
+}
+
+
+
+@media only screen and (max-width: 1130px){
+  .header__heading {
+    margin-left: 5.2%;
+  }
+}
+
+
+@media only screen and (max-width: 768px){
+  .header__heading {
+    margin-bottom: 18.5px;
+  }
+
+  .header {
+    height: 66px;
+  }
+}
+
+
+@media only screen and (max-width: 561px){
+  .header__heading {
+    margin-left: 10px;
+  }
+}
+
+@media only screen and (max-width: 491px){
+.header__menu-button {
+  width: 24px;
+  height: 24px;
+  margin: 22px 16px 16px auto;
+  background-color: transparent;
+  cursor: pointer;
+  border: none;
+}
+}
+
+@media only screen and (max-width: 347px){
+
+  .header__menu-button {
+  margin-top: 16px;
+  }
+
+  .header__heading {
+    font-size: 16px;
+    line-height: calc(24 / 16);
+    margin: auto auto auto 16px;
+  }
+
+  .header {
+    height: 56px;
+  }
+
+}
+

@@ -1,3 +1,4 @@
+import './SavedNewsHeader.css'
 
 function SavedNewsHeader() {
 

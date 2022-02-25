@@ -3,6 +3,13 @@ import './SearchForm.css'
 
 function SearchForm(props) {
   const [newsToSearch, setNewsToSearch] = React.useState('');;
+  const latestKeyword = localStorage.getItem('latest-search');
+
+  React.useEffect(() => {
+    if (latestKeyword) {
+      setNewsToSearch(latestKeyword);
+    } return
+  }, [latestKeyword])
 
   function handleinputChange(e) {
     setNewsToSearch(e.target.value);

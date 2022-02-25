@@ -6,10 +6,13 @@ import blackMenuPath from '../images/menu-black.png'
 import logoutPath from '../images/logout-white.png'
 import blackLogoutPath from '../images/logout.png'
 import './Nav.css'
+import CurrentUserContext from '../contexts/CurrentUserContext';
 
 
 function Nav(props) {
   const [isDesktop, setIsDesktop] = React.useState(false);
+
+  const currentUser = React.useContext(CurrentUserContext);
 
   react.useEffect(() => {
     const updatePredicate = () => {
@@ -29,7 +32,7 @@ function Nav(props) {
         {props.isLoggedIn && <Link className='header__white-navigation-button' to='/saved-news' onClick={props.onClose}>Saved articles</Link>}
         {props.isLoggedIn &&
         <button onClick={props.handleLogout} type='button' className='header__logout-button header__signin-button_type_nav'>
-          {props.userName}
+          {currentUser.name}
           <img className='header__logout-image' src={logoutPath} alt='logout icon'/>
         </button>}
       </nav>
@@ -41,7 +44,7 @@ function Nav(props) {
         {isDesktop && <Link to='/saved-news' className='header__black-navigation-button header__black-navigation-button_active'>Saved articles</Link>}
         {isDesktop &&
         <button onClick={props.handleLogout} type='button' className='header__logout-button header__logout-button_type_black'>
-          {props.userName}
+          {currentUser.name}
           <img className='header__logout-image' src={blackLogoutPath} alt='logout icon'/>
         </button>}
         {!isDesktop && <button className='header__menu-button'><img src={blackMenuPath} onClick={props.handleOpenPopupNav} alt='menu'/></button>}
@@ -56,7 +59,7 @@ function Nav(props) {
       {isDesktop ?  !props.isLoggedIn && <button type='button' onClick={props.handleOpenPopupSignin} className='header__signin-button'>Sign in</button> : <button className='header__menu-button'><img src={menuPath} onClick={props.handleOpenPopupNav} alt='menu'/></button>}
       {(isDesktop && props.isLoggedIn) &&
       <button onClick={props.handleLogout} type='button' className='header__logout-button'>
-        {props.userName}
+        {currentUser.name}
         <img className='header__logout-image' src={logoutPath} alt='logout icon'/>
       </button>}
     </nav>

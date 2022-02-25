@@ -1,5 +1,4 @@
 import React from 'react';
-// import { Switch, Route, Redirect } from 'react-router-dom';
 import '../index.css';
 import './App.css'
 import Header from './Header.js'
@@ -16,6 +15,7 @@ import ProtectedRoute from './ProtectedRoute';
 import { Switch, Route } from 'react-router';
 import SavedNewsHeader from './SavedNewsHeader';
 import InfoTooltip from './InfoTooltip';
+import CurrentUserContext from '../contexts/CurrentUserContext';
 
 function App() {
 
@@ -27,35 +27,33 @@ function App() {
   const [cardsToRender, setCardsToRender] = React.useState(false)
   const [nCardsToRender, setNCardsToRender] = React.useState(3);
   const [isLoggedIn, setIsLoggedIn] = React.useState(false);
-  const [userName, setUserName] = React.useState('');
-  const [savedCards, setSavedCards] = React.useState([])
-  const [isInfoPopupOpened, setIstInfoPopupOpened]= React.useState(false);
+  const [currentUser, setCurrentUser] = React.useState('');
+  const [savedArticles, setSavedArticles] = React.useState([])
+  const [isInfoPopupOpened, setIstInfoPopupOpened] = React.useState(false);
+  const [keyword, setKeyword] = React.useState('');
+
 
   React.useEffect(() => {
-    searchNewsApi.getArticles('israel')
-      .then((res) => setSavedCards(res.articles))
-      .catch((err) => console.log(err));
-  }, [])
-
-  React.useEffect(() => {
-    savedNewsApi.getUserInfo(localStorage.getItem('token'))
-    .then(() => {
-      setIsLoggedIn(true);
-    })
-    .then(() => {
+    if (localStorage.getItem('token')) {
       savedNewsApi.getUserInfo(localStorage.getItem('token'))
-      .then((res) => {
-        setUserName(res.name);
-      })
+    .then((res) => {
+      setIsLoggedIn(true);
+      setCurrentUser(res);
     })
     .then(() => {
       savedNewsApi.getArticles(localStorage.getItem('token'))
       .then((res) => {
         console.log(res);
-        // setSavedCards(res);
+        setSavedArticles(res);
       })
     })
+    .then(() => {
+      if (localStorage.getItem('latest-search')) {
+        handleSearchSubmit(localStorage.getItem('latest-search'));
+      } return
+    })
     .catch((err) => console.log(err));
+    }
   }, [])
 
 
@@ -66,7 +64,7 @@ function App() {
     })
     .then(() => {
       savedNewsApi.getUserInfo(localStorage.getItem('token')).then((res) => {
-        setUserName(res.name)
+        setCurrentUser(res)
         setIsLoggedIn(true);
         setIsPopupSigninOpen(false)
       })
@@ -101,10 +99,12 @@ function App() {
           setIsSearching(false);
           setNotFound(true);
           setCardsToRender(false);
+        } else {
+          setIsSearching(false);
+          setCardsToRender(res.articles);
+          localStorage.setItem('latest-search', searchData);
+          setKeyword(searchData);
         }
-        setIsSearching(false);
-        console.log(res);
-        setCardsToRender(res.articles)
       })
       .catch((err) => {
         setIsSearching(false);
@@ -113,6 +113,18 @@ function App() {
         console.log(err)
       })
       .finally(setNCardsToRender(3));
+  }
+
+  function handleSaveArticle(articleData) {
+    savedNewsApi.saveArticle(localStorage.getItem('token'), articleData)
+    .then((res) => setSavedArticles([...savedArticles, res]))
+     .catch((err) => console.log(err));
+  }
+
+  function handleDeleteArticle(articleId) {
+    savedNewsApi.deleteSavedArticle(localStorage.getItem('token'), articleId)
+    .then((res) => console.log(res))
+     .catch((err) => console.log(err));
   }
 
   function handleOpenPopupSignin() {
@@ -139,7 +151,10 @@ function App() {
   function handleLogout() {
     setIsLoggedIn(false);
     localStorage.removeItem('token');
-    closePopups();
+    localStorage.removeItem('latest-search');
+    setCardsToRender([]);
+    setSavedArticles([]);
+    closePopups();;
   }
 
 
@@ -148,27 +163,29 @@ function App() {
       <PopupAuth isOpen={isPopupSigninOpen} handleSignin={handleSignin} onClose={closePopups} title={'Sign in'} submitBtnTitle={'Sign in'} isRegister={false} redirectBtn={'Sign up'} handleRedirect={handleOpenPopupSignup}/>
       <PopupAuth isOpen={isPopupSignupOpen} handleRegister={handleRegister} onClose={closePopups} title={'Sign up'} submitBtnTitle={'Sign up'} isRegister={true} redirectBtn={'Sign in'} handleRedirect={handleOpenPopupSignin}/>
       <InfoTooltip handleRedirect={handleOpenPopupSignin} isOpen={isInfoPopupOpened} onClose={closePopups}/>
-      <PopupNav userName={userName} isLoggedIn={isLoggedIn} handleLogout={handleLogout} isOpen={isPopupNavOpen} onClose={closePopups} handleOpenPopupSignin={handleOpenPopupSignin}/>
-      <Switch>
-        <ProtectedRoute loggedIn={isLoggedIn} path='/saved-news'>
-          <Header handleLogout={handleLogout} isLoggedIn={isLoggedIn} isSavedNews={true} userName={userName} isPopup={false} handleOpenPopupNav={handleOpenPopupNav} handleOpenPopupSignin={handleOpenPopupSignin}/>
-          <SavedNewsHeader/>
-          <NewsCardsList isSavedNews={true} handleShowMore={showMoreCards} nCardsToRender={nCardsToRender} cardsToRender={savedCards}/>
-          <Footer/>
-        </ProtectedRoute>
-        <Route path='/'>
-          <div className='upper-container'>
-            <Header handleLogout={handleLogout} isSavedNews={false} isLoggedIn={isLoggedIn} userName={userName} isPopup={false} handleOpenPopupNav={handleOpenPopupNav} handleOpenPopupSignin={handleOpenPopupSignin}/>
-            <h2 className='upper-container__heading'>What's going on in the world?</h2>
-            <p className='upper-container__subtitle'>Find the latest news on any topic and save them in your personal account.</p>
-            <SearchForm handleSubmit={handleSearchSubmit}/>
-          </div>
-          <Preloader isSearching={isSearching} notFound={notFound}/>
-          {cardsToRender && <NewsCardsList isSavedNews={false} isLoggedIn={isLoggedIn} handleShowMore={showMoreCards} nCardsToRender={nCardsToRender} cardsToRender={cardsToRender}/>}
-          <AboutAuthor/>
-          <Footer/>
-        </Route>
-      </Switch>
+      <CurrentUserContext.Provider value={currentUser}>
+        <PopupNav isLoggedIn={isLoggedIn} handleLogout={handleLogout} isOpen={isPopupNavOpen} onClose={closePopups} handleOpenPopupSignin={handleOpenPopupSignin}/>
+        <Switch>
+          <ProtectedRoute loggedIn={isLoggedIn} path='/saved-news'>
+            <Header handleLogout={handleLogout} isLoggedIn={isLoggedIn} isSavedNews={true} isPopup={false} handleOpenPopupNav={handleOpenPopupNav} handleOpenPopupSignin={handleOpenPopupSignin}/>
+            <SavedNewsHeader keyword={keyword} savedArticles={savedArticles}/>
+            <NewsCardsList handleDeleteArticle={handleDeleteArticle} isSavedNews={true} handleShowMore={showMoreCards} nCardsToRender={nCardsToRender} cardsToRender={savedArticles}/>
+            <Footer/>
+          </ProtectedRoute>
+          <Route path='/'>
+            <div className='upper-container'>
+              <Header handleLogout={handleLogout} isSavedNews={false} isLoggedIn={isLoggedIn} isPopup={false} handleOpenPopupNav={handleOpenPopupNav} handleOpenPopupSignin={handleOpenPopupSignin}/>
+              <h2 className='upper-container__heading'>What's going on in the world?</h2>
+              <p className='upper-container__subtitle'>Find the latest news on any topic and save them in your personal account.</p>
+              <SearchForm handleSubmit={handleSearchSubmit}/>
+            </div>
+            <Preloader isSearching={isSearching} notFound={notFound}/>
+            {cardsToRender && <NewsCardsList handleDeleteArticle={handleDeleteArticle} handleSaveArticle={handleSaveArticle} keyword={keyword} isSavedNews={false} isLoggedIn={isLoggedIn} handleShowMore={showMoreCards} nCardsToRender={nCardsToRender} cardsToRender={cardsToRender} savedArticles={savedArticles}/>}
+            <AboutAuthor/>
+            <Footer/>
+          </Route>
+        </Switch>
+      </CurrentUserContext.Provider>
     </div>
   );
 }

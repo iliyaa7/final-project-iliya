@@ -11,7 +11,7 @@ function Header(props) {
       ?
       <button onClick={props.onClose} type="button" className="popup__close-button popup__close-button_type_nav" id="close__form"/>
       :
-      <Nav handleLogout={props.handleLogout} userName={props.userName} isPopup={props.isPopup} isLoggedIn={props.isLoggedIn} isSavedNews={props.isSavedNews} handleOpenPopupNav={props.handleOpenPopupNav} handleOpenPopupSignin={props.handleOpenPopupSignin}/>}
+      <Nav handleLogout={props.handleLogout} isPopup={props.isPopup} isLoggedIn={props.isLoggedIn} isSavedNews={props.isSavedNews} handleOpenPopupNav={props.handleOpenPopupNav} handleOpenPopupSignin={props.handleOpenPopupSignin}/>}
     </header>
   );
 }

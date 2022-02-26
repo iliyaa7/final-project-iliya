@@ -123,7 +123,7 @@ function App() {
 
   function handleDeleteArticle(articleId) {
     savedNewsApi.deleteSavedArticle(localStorage.getItem('token'), articleId)
-    .then((res) => console.log(res))
+    .then((res) => setSavedArticles(savedArticles.filter(article => article._id !== res.deletedArticle._id)))
      .catch((err) => console.log(err));
   }
 

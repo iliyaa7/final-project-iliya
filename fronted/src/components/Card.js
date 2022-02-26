@@ -15,11 +15,13 @@ function Card(props) {
   //   `${isLiked ? 'post__button post__button_active' : 'post__button'}`
   // );
 
-  const isLiked = () => {
-    if (!props.isSavedNews && props.isLoggedIn) {
-     return props.savedArticles.some(i => i.link === props.card.url);
-    }
-  }
+React.useEffect(() => {
+  if (!props.isSavedNews && props.isLoggedIn) {
+    if(props.savedArticles.some(i => i.link === props.card.url)) {
+      setIsBtnClick(true);
+    } return
+  } return
+}, [props.isSavedNews, props.isLoggedIn, props.savedArticles, props.card.url])
 
 
 
@@ -35,7 +37,10 @@ function Card(props) {
   }
 
   function handleFavoriteClick() {
-    if(isLiked) {
+    if(!isBtnClick) {
+      props.handleSaveArticle(article)
+      setIsBtnClick(true)
+    } else {
       props.savedArticles.forEach((article) => {
         if (article.link === props.card.url) {
           props.handleDeleteArticle(article._id);
@@ -43,9 +48,6 @@ function Card(props) {
         }
       })
     }
-      props.handleSaveArticle(article)
-      setIsBtnClick(true)
-    
   }
 
   function handleDeleteCard() {
@@ -63,7 +65,7 @@ function Card(props) {
 
   return (
     <div className="card">
-      {!props.isSavedNews && <button onClick={handleFavoriteClick} className={`card__button ${isLiked() && 'card__button_type_favorite_active'} ${isBtnClick ? 'card__button_type_favorite_active' :' card__button_type_favorite'}`} disabled={!props.isLoggedIn}/>}
+      {!props.isSavedNews && <button onClick={handleFavoriteClick} className={`card__button ${isBtnClick ? 'card__button_type_favorite_active' :' card__button_type_favorite'}`} disabled={!props.isLoggedIn}/>}
       {props.isSavedNews && <button onClick={handleDeleteCard} className='card__button card__button_type_delete'/>}
       {props.isSavedNews && <p className='card__keyword'>{article.keyword}</p>}
       {props.isSavedNews ? <p className='card__hover-elemnt'>Remove from saved</p> : !props.isLoggedIn && <p className='card__hover-elemnt'>Sign in to save articles</p> }

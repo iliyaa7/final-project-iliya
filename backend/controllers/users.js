@@ -8,11 +8,12 @@ const InvalidDataError = require('../errors/invalid-data-err');
 const NotFoundUserError = new NotFoundError('No user found with that id');
 
 module.exports.createUser = (req, res, next) => {
-  const { email, password } = req.body;
+  const { email, password, name } = req.body;
   bcrypt.hash(password, 10)
     .then((hash) => User.create({
       email,
       password: hash,
+      name,
     }))
     .then((user) => {
       user.password = undefined;

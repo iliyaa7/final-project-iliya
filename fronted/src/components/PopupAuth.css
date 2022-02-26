@@ -1,0 +1,50 @@
+@import url('./PopupWithForm.css');
+
+.popup__input-title {
+  font-family: Inter, sans-serif, serif;
+  font-style: normal;
+  font-weight: 400;
+  font-size: 12px;
+  line-height: calc(15 / 12);
+  color: #2F71E5;
+  margin: 13px auto 0 0;
+  }
+
+.popup__input-title:first-of-type {
+  margin-top: 22px;
+}
+
+.popup__highlighted-text {
+  color: #2F71E5;
+  font-family: Inter, sans-serif, serif;
+  font-style: normal;
+  font-weight: 400;
+  font-size: 14px;
+  line-height: calc(17 / 14);
+  margin: 0;
+}
+
+.popup__redirect-button {
+  background-color: transparent;
+  border: none;
+  margin: 16px auto 28px;
+  font-family: Inter, sans-serif, serif;
+  font-style: normal;
+  font-weight: 400;
+  font-size: 14px;
+  line-height: calc(17 / 14);
+  text-align: center;
+  color: #000000;
+  cursor: pointer;
+  transition: opacity .2s linear;
+}
+
+.popup__redirect-button:hover {
+  opacity: .8;
+}
+
+@media only screen and (max-width: 400px){
+  .popup__redirect-button {
+    margin-left: auto;
+  }
+}

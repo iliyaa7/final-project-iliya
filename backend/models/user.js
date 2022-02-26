@@ -27,9 +27,9 @@ const userSchema = new Schema({
   },
   name: {
     type: String,
-    default: 'Iliya',
     minlength: 2,
     maxlength: 30,
+    required: true,
   },
 });
 

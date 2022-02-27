@@ -8,8 +8,8 @@ import PopupAuth from './PopupAuth';
 import Footer from './Footer';
 import AboutAuthor from './AboutAuthor';
 import Preloader from './Preloader';
-import searchNewsApi from '../utils/searchNewsApi';
-import savedNewsApi from '../utils/savedNewsApi'
+import searchNewsApi from '../utils/NewsApi';
+import savedNewsApi from '../utils/MainApi'
 import NewsCardsList from './NewsCardsList';
 import ProtectedRoute from './ProtectedRoute';
 import { Switch, Route } from 'react-router';
@@ -31,7 +31,10 @@ function App() {
   const [savedArticles, setSavedArticles] = React.useState([])
   const [isInfoPopupOpened, setIstInfoPopupOpened] = React.useState(false);
   const [keyword, setKeyword] = React.useState('');
-
+  const [searchError, setSearchError] = React.useState(false);
+  const [isUniqeMaillError, setIsUniqeMailErrror] = React.useState(false);
+  const [isIncorrectError, setIsIncorrectError] = React.useState(false);
+  const [serverError, setServerError] = React.useState(false);
 
   React.useEffect(() => {
     if (localStorage.getItem('token')) {
@@ -43,7 +46,6 @@ function App() {
     .then(() => {
       savedNewsApi.getArticles(localStorage.getItem('token'))
       .then((res) => {
-        console.log(res);
         setSavedArticles(res);
       })
     })
@@ -58,6 +60,7 @@ function App() {
 
 
   function handleSignin(newUserData) {
+    resetAuthErrors();
     savedNewsApi.signin(newUserData)
     .then((res) => {
       localStorage.setItem('token', res.token);
@@ -69,12 +72,22 @@ function App() {
         setIsPopupSigninOpen(false)
       })
     })
+    .then(() => {
+      savedNewsApi.getArticles(localStorage.getItem('token'))
+      .then((res) => setSavedArticles(res))
+    })
     .catch((err) => {
-      console.log(err);
-  });
+      if (err.message.includes(401)) {
+        setIsIncorrectError(true);
+      } else {
+        setServerError(true);
+      }
+      console.log(err)
+    });
   }
 
   function handleRegister(UserData) {
+    resetAuthErrors();
     savedNewsApi.signup(UserData)
     .then((res) => {
       console.log(res);
@@ -82,8 +95,19 @@ function App() {
       setIstInfoPopupOpened(true);
     })
     .catch((err) => {
-      console.log(err);
+      if (err.message.includes(409)) {
+        setIsUniqeMailErrror(true);
+      } else {
+        setServerError(true);
+      }
+      console.log(err)
     });
+  }
+
+  function resetAuthErrors() {
+    setIsUniqeMailErrror(false);
+    setServerError(false);
+    setIsIncorrectError(false);
   }
 
   function showMoreCards() {
@@ -92,6 +116,7 @@ function App() {
 
   function handleSearchSubmit(searchData) {
     setNotFound(false);
+    setSearchError(false);
     setIsSearching(true);
     searchNewsApi.getArticles(searchData)
       .then((res) => {
@@ -108,7 +133,7 @@ function App() {
       })
       .catch((err) => {
         setIsSearching(false);
-        setNotFound(true);
+        setSearchError(true);
         setCardsToRender(false);
         console.log(err)
       })
@@ -133,7 +158,7 @@ function App() {
   }
 
   function handleOpenPopupSignup() {
-    setIsPopupSigninOpen(false);
+    closePopups();
     setIsPopupSignupOpen(true);
   }
 
@@ -152,34 +177,35 @@ function App() {
     setIsLoggedIn(false);
     localStorage.removeItem('token');
     localStorage.removeItem('latest-search');
-    setCardsToRender([]);
+    setCardsToRender(false);
     setSavedArticles([]);
-    closePopups();;
+    setKeyword('');
+    closePopups();
   }
 
 
   return (
     <div className='bodyy'>
-      <PopupAuth isOpen={isPopupSigninOpen} handleSignin={handleSignin} onClose={closePopups} title={'Sign in'} submitBtnTitle={'Sign in'} isRegister={false} redirectBtn={'Sign up'} handleRedirect={handleOpenPopupSignup}/>
-      <PopupAuth isOpen={isPopupSignupOpen} handleRegister={handleRegister} onClose={closePopups} title={'Sign up'} submitBtnTitle={'Sign up'} isRegister={true} redirectBtn={'Sign in'} handleRedirect={handleOpenPopupSignin}/>
+      <PopupAuth isIncorrectError={isIncorrectError} serverError={serverError} isOpen={isPopupSigninOpen} handleSignin={handleSignin} onClose={closePopups} title={'Sign in'} submitBtnTitle={'Sign in'} isRegister={false} redirectBtn={'Sign up'} handleRedirect={handleOpenPopupSignup}/>
+      <PopupAuth isUniqeMaillError={isUniqeMaillError} serverError={serverError} isOpen={isPopupSignupOpen} handleRegister={handleRegister} onClose={closePopups} title={'Sign up'} submitBtnTitle={'Sign up'} isRegister={true} redirectBtn={'Sign in'} handleRedirect={handleOpenPopupSignin}/>
       <InfoTooltip handleRedirect={handleOpenPopupSignin} isOpen={isInfoPopupOpened} onClose={closePopups}/>
       <CurrentUserContext.Provider value={currentUser}>
-        <PopupNav isLoggedIn={isLoggedIn} handleLogout={handleLogout} isOpen={isPopupNavOpen} onClose={closePopups} handleOpenPopupSignin={handleOpenPopupSignin}/>
+        <PopupNav isLoggedIn={isLoggedIn} handleLogout={handleLogout} isOpen={isPopupNavOpen} onClose={closePopups} handleOpenPopupSignup={handleOpenPopupSignup}/>
         <Switch>
           <ProtectedRoute loggedIn={isLoggedIn} path='/saved-news'>
-            <Header handleLogout={handleLogout} isLoggedIn={isLoggedIn} isSavedNews={true} isPopup={false} handleOpenPopupNav={handleOpenPopupNav} handleOpenPopupSignin={handleOpenPopupSignin}/>
+            <Header handleLogout={handleLogout} isLoggedIn={isLoggedIn} isSavedNews={true} isPopup={false} handleOpenPopupNav={handleOpenPopupNav}/>
             <SavedNewsHeader keyword={keyword} savedArticles={savedArticles}/>
-            <NewsCardsList handleDeleteArticle={handleDeleteArticle} isSavedNews={true} handleShowMore={showMoreCards} nCardsToRender={nCardsToRender} cardsToRender={savedArticles}/>
+            {savedArticles.length > 0 && <NewsCardsList handleDeleteArticle={handleDeleteArticle} isSavedNews={true} handleShowMore={showMoreCards} nCardsToRender={nCardsToRender} cardsToRender={savedArticles}/>}
             <Footer/>
           </ProtectedRoute>
           <Route path='/'>
             <div className='upper-container'>
-              <Header handleLogout={handleLogout} isSavedNews={false} isLoggedIn={isLoggedIn} isPopup={false} handleOpenPopupNav={handleOpenPopupNav} handleOpenPopupSignin={handleOpenPopupSignin}/>
+              <Header handleLogout={handleLogout} isSavedNews={false} isLoggedIn={isLoggedIn} isPopup={false} handleOpenPopupNav={handleOpenPopupNav} handleOpenPopupSignup={handleOpenPopupSignup}/>
               <h2 className='upper-container__heading'>What's going on in the world?</h2>
               <p className='upper-container__subtitle'>Find the latest news on any topic and save them in your personal account.</p>
-              <SearchForm handleSubmit={handleSearchSubmit}/>
+              <SearchForm  handleSubmit={handleSearchSubmit} isLoggedIn={isLoggedIn}/>
             </div>
-            <Preloader isSearching={isSearching} notFound={notFound}/>
+            <Preloader searchError={searchError} isSearching={isSearching} notFound={notFound}/>
             {cardsToRender && <NewsCardsList handleDeleteArticle={handleDeleteArticle} handleSaveArticle={handleSaveArticle} keyword={keyword} isSavedNews={false} isLoggedIn={isLoggedIn} handleShowMore={showMoreCards} nCardsToRender={nCardsToRender} cardsToRender={cardsToRender} savedArticles={savedArticles}/>}
             <AboutAuthor/>
             <Footer/>

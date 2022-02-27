@@ -6,6 +6,10 @@
   align-items: flex-start;
 }
 
+.saved-news__header-container_long {
+  height: 80vh;
+}
+
 .saved-news__title {
   font-family: Roboto, sans-serif, serif;
   font-style: normal;

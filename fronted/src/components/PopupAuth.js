@@ -20,7 +20,6 @@ function PopupAuth(props) {
   }
 
   function handleSubmit(e) {
-    console.log(name)
     e.preventDefault();
     if (props.isRegister) {
       props.handleRegister({
@@ -35,6 +34,19 @@ function PopupAuth(props) {
     });
   }
 
+  const submitSignupErrMessage = () => {
+    if (props.isUniqeMaillError) {
+     return 'This is email is already registered'
+    } else if (props.serverError) {
+      return 'Something went wrong with the server, please try again'
+    } else if (props.isIncorrectError) {
+      return 'Incorrect email or password'
+     } else {
+      return ''
+    }
+  }
+
+
   return (
     <PopupWithForm isOpen={props.isOpen} onClose={props.onClose} title={props.title} handleSubmit={handleSubmit}>
       <label className='popup__input-title' >Email</label>
@@ -46,7 +58,7 @@ function PopupAuth(props) {
       {props.isRegister && <label className='popup__input-title' >Username</label>}
       {props.isRegister && <input className='popup__form-input' onChange={handleUsernameChange} placeholder='Enter your username' value={name|| ''} type='text' minLength='2' maxLength='40' required noValidate></input>}
       {props.isRegister && <span className='popup__form-input-error' id='Username-error'></span>}
-      <span className='popup__form-input-error' id='submit-error'></span>
+      <span className='popup__form-input-error' id='submit-error'>{submitSignupErrMessage()}</span>
       <button type='submit' className='popup__save-button'>{props.submitBtnTitle}</button>
       <button type='button' onClick={props.handleRedirect} className='popup__redirect-button'>{'or '}<b className='popup__highlighted-text'>{props.redirectBtn}</b></button>
     </PopupWithForm>

@@ -104,7 +104,7 @@
 }
 
 .popup__form-input-error:last-of-type {
-  margin-top: 17px;
+  margin: 17px auto 0;
 }
 
 .popup__form-input-error_active {

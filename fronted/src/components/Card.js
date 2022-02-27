@@ -1,5 +1,6 @@
 import React from "react";
 import './Card.css';
+import noImageFoundPath from '../images/no_image.png';
 
 function Card(props) {
 
@@ -21,7 +22,7 @@ function Card(props) {
    date: props.card.publishedAt || props.card.date,
    source: props.card.source.name ||props.card.source,
    link: props.card.url ||props.card.link,
-   image: props.card.urlToImage || props.card.image,
+   image: props.card.urlToImage || props.card.image || noImageFoundPath,
    keyword: props.isSavedNews ? props.card.keyword : props.keyword,
    _id: null || props.card._id
   }

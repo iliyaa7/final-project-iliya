@@ -186,8 +186,8 @@ function App() {
 
   return (
     <div className='bodyy'>
-      <PopupAuth isIncorrectError={isIncorrectError} serverError={serverError} isOpen={isPopupSigninOpen} handleSignin={handleSignin} onClose={closePopups} title={'Sign in'} submitBtnTitle={'Sign in'} isRegister={false} redirectBtn={'Sign up'} handleRedirect={handleOpenPopupSignup}/>
-      <PopupAuth isUniqeMaillError={isUniqeMaillError} serverError={serverError} isOpen={isPopupSignupOpen} handleRegister={handleRegister} onClose={closePopups} title={'Sign up'} submitBtnTitle={'Sign up'} isRegister={true} redirectBtn={'Sign in'} handleRedirect={handleOpenPopupSignin}/>
+      {isPopupSigninOpen && <PopupAuth isValidatedForm={true} isIncorrectError={isIncorrectError} serverError={serverError} isOpen={isPopupSigninOpen} handleSignin={handleSignin} onClose={closePopups} title={'Sign in'} submitBtnTitle={'Sign in'} isRegister={false} redirectBtn={'Sign up'} handleRedirect={handleOpenPopupSignup}/>}
+      {isPopupSignupOpen && <PopupAuth isValidatedForm={true} isUniqeMaillError={isUniqeMaillError} serverError={serverError} isOpen={isPopupSignupOpen} handleRegister={handleRegister} onClose={closePopups} title={'Sign up'} submitBtnTitle={'Sign up'} isRegister={true} redirectBtn={'Sign in'} handleRedirect={handleOpenPopupSignin}/>}
       <InfoTooltip handleRedirect={handleOpenPopupSignin} isOpen={isInfoPopupOpened} onClose={closePopups}/>
       <CurrentUserContext.Provider value={currentUser}>
         <PopupNav isLoggedIn={isLoggedIn} handleLogout={handleLogout} isOpen={isPopupNavOpen} onClose={closePopups} handleOpenPopupSignup={handleOpenPopupSignup}/>

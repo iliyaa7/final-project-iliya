@@ -1,40 +1,82 @@
-import React, { useCallback } from "./react";
+export default class FormValidator {
+  constructor(settings, formElement) {
+    this._settings = settings;
+    this._formElement = formElement;
+    this._submmitButton = formElement.querySelector(
+      settings.submitButtonSelector
+    );
+    this._inputList = Array.from(
+      formElement.querySelectorAll(settings.inputSelector)
+    );
+    this._inactiveButtonClass = settings.inactiveButtonClass;
+    this._inputErrorClass = settings.inputErrorClass;
+    this._errorClass = settings.errorClass;
+  }
 
-export function useForm() {
-  const [values, setValues] = React.useState({});
+  _showInputError(inputElement, errorMessage) {
+    const errorElement = this._formElement.querySelector(
+      `#${inputElement.id}-error`
+    );
+    inputElement.classList.add(this._inputErrorClass);
+    errorElement.classList.add(this._errorClass);
+    errorElement.textContent = errorMessage;
+  }
 
-  const handleChange = (event) => {
-    const target = event.target;
-    const value = target.value;
-    const name = target.name;
-    setValues({...values, [name]: value});
-  };
+  _hideInputError(inputElement) {
+    const errorElement = this._formElement.querySelector(
+      `#${inputElement.id}-error`
+    );
+    inputElement.classList.remove(this._inputErrorClass);
+    errorElement.classList.remove(this._errorClass);
+    errorElement.textContent = "";
+  }
 
-  return {values, handleChange, setValues};
-}
+  _checkInputValidity(inputElement) {
+    if (!inputElement.validity.valid) {
+      this._showInputError(inputElement, inputElement.validationMessage);
+    } else {
+      this._hideInputError(inputElement);
+    }
+  }
 
-export function useFormWithValidation() {
-  const [values, setValues] = React.useState({});
-  const [errors, setErrors] = React.useState({});
-  const [isValid, setIsValid] = React.useState(false);
+  _hasInvalidInput() {
+    const hasInvalidInput = this._inputList.some(
+      (inputElement) => !inputElement.validity.valid
+    );
+    return hasInvalidInput;
+  }
 
-  const handleChange = (event) => {
-    const target = event.target;
-    const name = target.name;
-    const value = target.value;
-    setValues({...values, [name]: value});
-    setErrors({...errors, [name]: target.validationMessage });
-    setIsValid(target.closest("form").checkValidity());
-  };
+  _toggleSubmitButton() {
+    if (this._hasInvalidInput()) {
+      this._submmitButton.classList.add(this._inactiveButtonClass);
+      this._submmitButton.setAttribute("disabled", "true");
+    } else {
+      this._submmitButton.classList.remove(this._inactiveButtonClass);
+      this._submmitButton.removeAttribute("disabled");
+    }
+  }
 
-  const resetForm = useCallback(
-    (newValues = {}, newErrors = {}, newIsValid = false) => {
-      setValues(newValues);
-      setErrors(newErrors);
-      setIsValid(newIsValid);
-    },
-    [setValues, setErrors, setIsValid]
-  );
+  _setEventListeners() {
+    this._toggleSubmitButton();
+    this._inputList.forEach((inputElement) => {
+      inputElement.addEventListener("input", () => {
+        this._checkInputValidity(inputElement);
+        this._toggleSubmitButton();
+      });
+    });
+  }
 
-  return { values, handleChange, errors, isValid, resetForm };
+  enableValidation() {
+    this._formElement.addEventListener("submit", (evt) => {
+      evt.preventDefault();
+    });
+    this._setEventListeners();
+  }
+
+  resetValidation() {
+    this._toggleSubmitButton();
+    this._inputList.forEach((inputElement) => {
+      this._hideInputError(inputElement)
+    });
+  }
 }

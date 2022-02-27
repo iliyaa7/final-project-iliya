@@ -14,6 +14,7 @@ function SavedNewsHeader(props) {
     });
     const keywordByPopularity = keywordsArray.reduce((previousKeyword, currentKeyword) =>
     {
+       // eslint-disable-next-line
       return previousKeyword[currentKeyword] ? ++previousKeyword[currentKeyword] : previousKeyword[currentKeyword] = 1, previousKeyword;
     }, {})
 

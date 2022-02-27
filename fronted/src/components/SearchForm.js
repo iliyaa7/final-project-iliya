@@ -3,7 +3,6 @@ import './SearchForm.css'
 
 function SearchForm(props) {
   const [newsToSearch, setNewsToSearch] = React.useState('');
-  const [isValid, setIsValid] = React.useState(true)
   const latestKeyword = localStorage.getItem('latest-search');
 
   React.useEffect(() => {
@@ -32,7 +31,7 @@ function SearchForm(props) {
   }
 
    function customValidation(e) {
-    e.target.setCustomValidity("Please enter a keyword")
+    e.target.setCustomValidity("Please enter a keyword");
   }
 
   return (

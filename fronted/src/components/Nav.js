@@ -28,7 +28,7 @@ function Nav(props) {
     return (
       <nav className='popup__nav-holder'>
         <Link className='header__white-navigation-button' onClick={props.onClose} to='/'>Home</Link>
-        {!props.isLoggedIn && <button type='button' onClick={props.handleOpenPopupSignin} className='header__signin-button header__signin-button_type_nav'>Sign in</button>}
+        {!props.isLoggedIn && <button type='button' onClick={props.handleOpenPopupSignup} className='header__signin-button header__signin-button_type_nav'>Sign in</button>}
         {props.isLoggedIn && <Link className='header__white-navigation-button' to='/saved-news' onClick={props.onClose}>Saved articles</Link>}
         {props.isLoggedIn &&
         <button onClick={props.handleLogout} type='button' className='header__logout-button header__signin-button_type_nav'>
@@ -56,7 +56,7 @@ function Nav(props) {
     <nav className='header__nav'>
       {isDesktop && <Link to='/' className='header__white-navigation-button header__white-navigation-button_active'>Home</Link>}
       {(isDesktop && props.isLoggedIn) && <Link className='header__white-navigation-button' to='/saved-news'>Saved articles</Link>}
-      {isDesktop ?  !props.isLoggedIn && <button type='button' onClick={props.handleOpenPopupSignin} className='header__signin-button'>Sign in</button> : <button className='header__menu-button'><img src={menuPath} onClick={props.handleOpenPopupNav} alt='menu'/></button>}
+      {isDesktop ?  !props.isLoggedIn && <button type='button' onClick={props.handleOpenPopupSignup} className='header__signin-button'>Sign in</button> : <button className='header__menu-button'><img src={menuPath} onClick={props.handleOpenPopupNav} alt='menu'/></button>}
       {(isDesktop && props.isLoggedIn) &&
       <button onClick={props.handleLogout} type='button' className='header__logout-button'>
         {currentUser.name}

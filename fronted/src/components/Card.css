@@ -81,6 +81,47 @@
   transition: visibility 0.7s, opacity 0.7s, color 0.5s ease-in-out;
 }
 
+.card__hover-elemnt_hidden {
+  visibility: hidden;
+  opacity: 0;
+  color: transparent;
+  position: absolute;
+  top: 62px;
+  right: 16px;
+}
+
+.card__error-elemnt {
+  font-family: Roboto, sans-serif, serif;
+  font-style: normal;
+  font-weight: 500;
+  font-size: 12px;
+  line-height: calc(14 / 2);
+  color: transparent;
+  max-width: 282px;
+  height: 40px;
+  position: absolute;
+  top: 62px;
+  right: 16px;
+  border: none;
+  background-color: #FFFFFF;
+  border-radius: 8px;
+  margin: 0;
+  padding: 0 5px 0 5px;
+  visibility: hidden;
+  opacity: 0;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  transition: visibility 0.7s, opacity 0.7s, color 0.5s ease-in-out;
+}
+
+.card__error-elemnt_active {
+  visibility: visible;
+  opacity: 1;
+  color: #1A1B22;
+}
+
 .card__keyword {
   position: absolute;
   padding: 0 22px 0 22px;
@@ -105,11 +146,12 @@
 }
 
 .card__image {
-  max-width: 100%;
+  width: 100%;
   min-height: 272px;
+  height: 272px;
   margin: 0;
   object-fit: cover;
-  object-position: 5% 0;
+  object-position: center;
 }
 
 .card__bottom-container {
@@ -136,6 +178,7 @@
   margin: 0;
   cursor: pointer;
   transition: opacity .2s linear;
+  width: 100%;
 }
 
 .card__link:hover {
@@ -230,11 +273,8 @@
 
 @media only screen and (max-width: 1000px){
   .card__hover-elemnt {
-    top: 62px;
-    right: 16px;
+      top: 62px;
+      right: 16px;
   }
 }
 
-@media only screen and (max-width: 768px){
-
-}

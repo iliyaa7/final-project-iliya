@@ -36,7 +36,7 @@ function SearchForm(props) {
 
   return (
     <form className='search-form' onSubmit={handleSubmit}>
-      <input onInvalid={customValidation} onChange={handleinputChange} type='text' name='news' className='search-form__input' placeholder='Enter topic' id='name' value={newsToSearch || ''} required/>
+      <input onInvalid={customValidation} onChange={handleinputChange} type='text' name='news' className='search-form__input' placeholder='Enter topic' id='news' value={newsToSearch || ''} required/>
       <button type='submit' className='search-form__button'>Search</button >
     </form>
   );

@@ -1,10 +1,6 @@
-const fetchFunction = (url, headers) => {
-  return fetch(url, headers)
-    .then(res => res.ok ? res.json() : res.json().then(err => Promise.reject(err)))
+import fetchFunction from "./fetchFunction";
 
-}
-
-const apiKey = '33120026ecc346598c10b1d1792d2b47';
+const apiKey = '09ba7cc1b3a942999110a5f35d31588a';
 
 const date = new Date();
 const last = new Date(date.getTime() - 7 * 24 * 60 * 60 * 1000);
@@ -29,5 +25,5 @@ const searchNewsApi = new Api({
 });
 
 
-export default searchNewsApi
+export default searchNewsApi;
 

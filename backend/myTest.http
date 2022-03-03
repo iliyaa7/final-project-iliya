@@ -26,7 +26,7 @@ Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2MjBhZjg1M
 
 post http://localhost:3000/articles
 Content-Type: application/json
-Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2MjBhZjg1MmQxNGFmM2I1ZGViYTI4YTIiLCJpYXQiOjE2NDUxNDMzNTgsImV4cCI6MTY0NTc0ODE1OH0.-pwcGSOIIUhU-V5cDXG9pVM35NirYQYPbOhgj7If5sk
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2MjBhZjg1MmQxNGFmM2I1ZGViYTI4YTIiLCJpYXQiOjE2NDYwMDAxNzgsImV4cCI6MTY0NjYwNDk3OH0.Hjd0B2l304WXvycQjzQoJAEhFRUDs2O5b9WqMBj47fM
 
 {
   "keyword": "sadddd",
@@ -34,8 +34,8 @@ Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2MjBhZjg1M
   "text": "israel",
   "date": "israel",
   "source": "israel",
-  "link": "https://code.s3.yandex.net/web-code/bald-mountains.jpg",
-  "image": "https://code.s3.yandex.net/web-code/bald-mountains.jpg"
+  "link": "https://www.idnes.cz/zlin/zpravy/turistika-cile-zajimavosti-pocty-navstevniku-zoo-skanzen.A220224_652380_zlin-zpravy_ppr",
+  "image": "https://upload.wikimedia.org/wikipedia/commons/a/a3/Image-not-found.png"
 }
 ###
 

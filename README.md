@@ -1,8 +1,12 @@
-in this project i have built my own api with node js, express and some libraries and modules like celbrate (and more others) for validation and other functionalities.
+In my final project for the Practicum program, I have created a web application for searching news items and a collection for storing the items you liked.
+T
 
-I have also built a responsive clinet side via react, and connected it to third party api and a the one i built before that.
+The client side application was written in React and used Routes, Context for managing states, protected routes, auth via jwt token and local storage for storing this token.
+Only a registered user can save the items he searched, and the user can see a summery of his collection (Wich search key words were used the most among his saved items)
+The user auth and all the saved items data is stored and manipulated on a Rest API that I have built, while the searching for news is done with a third party API.
 
-the project was deployed to a virtual machine and registered to a domain for easy acsses.
+The Rest API was written in Node.js (express.js) and used MongoDB as the database. This Rest API contains middlewares, controllers. custom validators, auth via jwt token and error handlers.
 
+The project was deployed to a virtual machine On azure microsoft cloud.
 
 link to the deployed project - https://iliyaa7-final-project.students.nomoreparties.sbs/

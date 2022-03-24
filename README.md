@@ -1,5 +1,5 @@
 In my final project for the Practicum program, I have created a web application for searching news items and a collection for storing the items you liked.
-T
+
 
 The client side application was written in React and used Routes, Context for managing states, protected routes, auth via jwt token and local storage for storing this token.
 Only a registered user can save the items he searched, and the user can see a summery of his collection (Wich search key words were used the most among his saved items)

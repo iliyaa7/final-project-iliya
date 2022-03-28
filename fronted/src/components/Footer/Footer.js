@@ -1,6 +1,6 @@
 import React from 'react';
-import githubPath from '../images/github.svg'
-import facebookPath from '../images/facebook.svg'
+import githubPath from '../../images/github.svg'
+import facebookPath from '../../images/facebook.svg'
 import { Link } from 'react-router-dom'
 import './Footer.css'
 

@@ -1,12 +1,12 @@
 import react from 'react';
 import React from 'react';
 import {Link} from 'react-router-dom';
-import menuPath from '../images/menu.png'
-import blackMenuPath from '../images/menu-black.png'
-import logoutPath from '../images/logout-white.png'
-import blackLogoutPath from '../images/logout.png'
+import menuPath from '../../images/menu.png'
+import blackMenuPath from '../../images/menu-black.png'
+import logoutPath from '../../images/logout-white.png'
+import blackLogoutPath from '../../images/logout.png'
 import './Nav.css'
-import CurrentUserContext from '../contexts/CurrentUserContext';
+import CurrentUserContext from '../../contexts/CurrentUserContext';
 
 
 function Nav(props) {

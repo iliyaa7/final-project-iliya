@@ -1,7 +1,7 @@
 import React from 'react';
-import PopupWithForm from './PopupWithForm';
+import PopupWithForm from '../PopupWithForm/PopupWithForm';
 import './PopupAuth.css'
-import useFormAndValidation from '../utils/Validation'
+import useFormAndValidation from '../../utils/Validation'
 
 function PopupAuth(props) {
   const inputRef = React.useRef();
@@ -17,8 +17,8 @@ function PopupAuth(props) {
   //Just in case there is an auto fill of the input feilds, when opening the form.
   React.useEffect(() => {
     setIsValid(inputRef.current.closest('form').checkValidity());
-
-  },[setIsValid]);
+    console.log(values)
+  },[setIsValid, values]);
 
 
 

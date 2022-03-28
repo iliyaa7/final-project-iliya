@@ -1,5 +1,5 @@
-@import url('./PopupWithForm.css');
-@import url('./PopupNav.css');
+@import url('../PopupWithForm/PopupWithForm.css');
+@import url('../PopupNav/PopupNav.css');
 
 .header {
   width: 100%;

@@ -1,4 +1,4 @@
-@import url('./PopupWithForm.css');
+@import url('../PopupWithForm/PopupWithForm.css');
 
 .popup__container_type_tool-tip {
   height: 182px;

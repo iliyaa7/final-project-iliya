@@ -1,7 +1,7 @@
-@import url('./PopupWithForm.css');
+@import url('../PopupWithForm/PopupWithForm.css');
 
 .popup__close-button_type_nav {
-  background-image: url(../images/close.png);
+  background-image: url(../../images/close.png);
   width: 24px;
   height: 24px;
   margin: 16px 16px 16px 0;

@@ -28,25 +28,25 @@
 }
 
 .card__button_type_favorite {
-  background-image: url('../images/favorite-button.png');
+  background-image: url('../../images/favorite-button.png');
 }
 
 .card__button_type_favorite_active {
-  background-image: url('../images/favorite-button-blue.svg');
+  background-image: url('../../images/favorite-button-blue.svg');
 }
 
 .card__button_type_favorite:hover {
-  background-image: url('../images/favorite-button-black.png');
+  background-image: url('../../images/favorite-button-black.png');
 }
 
 
 
 .card__button_type_delete {
-  background-image: url('../images/trash.png');
+  background-image: url('../../images/trash.png');
 }
 
 .card__button_type_delete:hover {
-  background-image: url('../images/trash-black.png');
+  background-image: url('../../images/trash-black.png');
 }
 
 .card__button:hover ~ .card__hover-elemnt {

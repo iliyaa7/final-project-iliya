@@ -1,6 +1,6 @@
 import React from 'react';
 import './SavedNewsHeader.css'
-import CurrentUserContext from '../contexts/CurrentUserContext';
+import CurrentUserContext from '../../contexts/CurrentUserContext';
 
 function SavedNewsHeader(props) {
   const CurrentUser = React.useContext(CurrentUserContext)

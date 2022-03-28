@@ -1,22 +1,22 @@
 import React from 'react';
 import { Switch, Route } from 'react-router';
-import '../index.css';
+import '../../index.css';
 import './App.css'
-import Header from './Header.js'
-import SearchForm from './SearchForm';
-import PopupNav from './PopupNav';
-import PopupAuth from './PopupAuth';
-import Footer from './Footer';
-import AboutAuthor from './AboutAuthor';
-import Preloader from './Preloader';
-import searchNewsApi from '../utils/NewsApi';
-import savedNewsApi from '../utils/MainApi'
-import NewsCardsList from './NewsCardsList';
-import ProtectedRoute from './ProtectedRoute';
-import SavedNewsHeader from './SavedNewsHeader';
-import InfoTooltip from './InfoTooltip';
-import CurrentUserContext from '../contexts/CurrentUserContext';
-import showCardError from '../utils/CardErrorDsiplay';
+import Header from '../Header/Header'
+import SearchForm from '../SearchForm/SearchForm';
+import PopupNav from '../PopupNav/PopupNav';
+import PopupAuth from '../PopupAuth/PopupAuth';
+import Footer from '../Footer/Footer';
+import AboutAuthor from '../AboutAuthor/AboutAuthor';
+import Preloader from '../Preloader/Preloader';
+import searchNewsApi from '../../utils/NewsApi';
+import savedNewsApi from '../../utils/MainApi'
+import NewsCardsList from '../NewsCardList/NewsCardsList';
+import ProtectedRoute from '../ProtectedRout/ProtectedRoute';
+import SavedNewsHeader from '../SavedNewsHeader/SavedNewsHeader';
+import InfoTooltip from '../InfoTooltip/InfoTooltip';
+import CurrentUserContext from '../../contexts/CurrentUserContext';
+import showCardError from '../../utils/CardErrorDsiplay';
 
 function App(props) {
 

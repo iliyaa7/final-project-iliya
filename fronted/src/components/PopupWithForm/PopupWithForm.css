@@ -27,7 +27,7 @@
   cursor: pointer;
   width: 40px;
   height: 40px;
-  background-image: url(../images/Close_Icon.png);
+  background-image: url(../../images/Close_Icon.png);
   background-repeat: no-repeat;
   background-size: auto;
   background-position: center;
@@ -42,7 +42,7 @@
   width: 430px;
   border-radius: 10px;
   z-index: 2;
-  max-height: 433px;
+  max-height: 513px;
 }
 
 .popup__close-button:hover {

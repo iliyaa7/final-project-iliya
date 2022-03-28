@@ -1,5 +1,5 @@
-import Header from './Header';
-import Nav from './Nav';
+import Header from '../Header/Header';
+import Nav from '../Nav/Nav';
 import './PopupNav.css'
 
 function PopupWithForm(props) {

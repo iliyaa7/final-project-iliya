@@ -5,7 +5,7 @@ import './App.css'
 import Header from '../Header/Header'
 import SearchForm from '../SearchForm/SearchForm';
 import PopupNav from '../PopupNav/PopupNav';
-import PopupAuth from '../PopupAuth/PopupAuth';
+import PopupAuth from '../PopupWithAuth/PopupAuth';
 import Footer from '../Footer/Footer';
 import AboutAuthor from '../AboutAuthor/AboutAuthor';
 import Preloader from '../Preloader/Preloader';

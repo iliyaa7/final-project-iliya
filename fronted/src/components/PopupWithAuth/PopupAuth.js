@@ -65,7 +65,7 @@ function PopupAuth(props) {
       {props.isRegister && <span className='popup__form-input-error' id='name-error'>{errors.name}</span>}
       <span className='popup__form-input-error' id='submit-error'>{submitSignupErrMessage()}</span>
       <button type='submit' className={`popup__save-button ${!isValid && 'popup__save-button_disabled'}`}>{props.submitBtnTitle}</button>
-      <button type='button' onClick={props.handleRedirect} className='popup__redirect-button'>{'or'}<b className='popup__highlighted-text'>{props.redirectBtn}</b></button>
+      <button type='button' onClick={props.handleRedirect} className='popup__redirect-button'>{'or '}<b className='popup__highlighted-text'>{props.redirectBtn}</b></button>
     </PopupWithForm>
   );
 }

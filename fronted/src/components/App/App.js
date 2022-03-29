@@ -2,6 +2,8 @@ import React from 'react';
 import { Switch, Route } from 'react-router';
 import '../../index.css';
 import './App.css'
+import { Provider, useDispatch } from 'react-redux'
+import store from '../../store'
 import Header from '../Header/Header'
 import SearchForm from '../SearchForm/SearchForm';
 import PopupNav from '../PopupNav/PopupNav';
@@ -15,8 +17,8 @@ import NewsCardsList from '../NewsCardList/NewsCardsList';
 import ProtectedRoute from '../ProtectedRout/ProtectedRoute';
 import SavedNewsHeader from '../SavedNewsHeader/SavedNewsHeader';
 import InfoTooltip from '../InfoTooltip/InfoTooltip';
-import CurrentUserContext from '../../contexts/CurrentUserContext';
 import showCardError from '../../utils/CardErrorDsiplay';
+import changeCurrentUser from '../../actions/changeCurrentUser';
 
 function App(props) {
 
@@ -28,7 +30,6 @@ function App(props) {
   const [cardsToRender, setCardsToRender] = React.useState(false)
   const [nCardsToRender, setNCardsToRender] = React.useState(3);
   const [isLoggedIn, setIsLoggedIn] = React.useState(false);
-  const [currentUser, setCurrentUser] = React.useState('');
   const [savedArticles, setSavedArticles] = React.useState([])
   const [isInfoPopupOpened, setIstInfoPopupOpened] = React.useState(false);
   const [keyword, setKeyword] = React.useState('');
@@ -38,6 +39,7 @@ function App(props) {
   const [serverAuthError, setServerAuthError] = React.useState(false);
   const [isLoading, setIsLoading] = React.useState(true);
   const isOpen = isPopupSigninOpen || isPopupSignupOpen || isPopupNavOpen;
+  const dispatch = useDispatch();
 
   React.useEffect(() => {
     setIsLoading(true)
@@ -47,7 +49,7 @@ function App(props) {
       .then((res) => {
         setIsLoggedIn(true);
         setIsLoading(false);
-        setCurrentUser(res);
+        dispatch(changeCurrentUser(res));
       })
       .then(() => {
         savedNewsApi.getArticles(localStorage.getItem('token'))
@@ -102,7 +104,7 @@ function App(props) {
     })
     .then(() => {
       savedNewsApi.getUserInfo(localStorage.getItem('token')).then((res) => {
-        setCurrentUser(res)
+        dispatch(changeCurrentUser(res));
         setIsLoggedIn(true);
         setIsPopupSigninOpen(false)
       })
@@ -259,7 +261,6 @@ function App(props) {
           />
       }
       <InfoTooltip handleRedirect={handleOpenPopupSignin} isOpen={isInfoPopupOpened} onClose={closePopups}/>
-      <CurrentUserContext.Provider value={currentUser}>
         <PopupNav isLoggedIn={isLoggedIn} handleLogout={handleLogout} isOpen={isPopupNavOpen} onClose={closePopups} handleOpenPopupSignup={handleOpenPopupSignup}/>
         <Switch>
         <Route exact path='/'>
@@ -281,7 +282,6 @@ function App(props) {
             <Footer/>
           </ProtectedRoute>
         </Switch>
-      </CurrentUserContext.Provider>
     </div>
   );
 }

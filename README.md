@@ -9,4 +9,4 @@ The Rest API was written in Node.js (express.js) and used MongoDB as the databas
 
 The project was deployed to a virtual machine On azure microsoft cloud.
 
-link to the deployed project - https://iliyaa7-final-project.students.nomoreparties.sbs/
+link to the deployed project - https://www.igfs.online/

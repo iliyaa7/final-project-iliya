@@ -19,10 +19,16 @@ class Api {
   getArticles(searchData) {
     return fetchFunction(`${this._baseUrl}/v2/everything/?q=${searchData}&pageSize=100&from=${from}&to=${to}&apiKey=${apiKey}`);
   }
+
+  getTopArticles() {
+    return fetchFunction(`${this._baseUrl}/v2/top-headlines/?sources=techradar,reuters,CNBC,independent&pageSize=100&from=${from}&to=${to}&apiKey=${apiKey}`);
+  }
 }
 const searchNewsApi = new Api({
   baseUrl: "https://nomoreparties.co/news",
 });
+
+
 
 
 export default searchNewsApi;

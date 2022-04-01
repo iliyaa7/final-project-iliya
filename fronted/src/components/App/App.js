@@ -68,6 +68,17 @@ function App(props) {
   }, [dispatch])
 
   React.useEffect(() => {
+    if(!localStorage.getItem('latest-search') || isLoggedIn) {
+      searchNewsApi.getTopArticles()
+      .then((res) => {
+        setCardsToRender(res.articles);
+        setKeyword('top-news-today');
+      })
+      .catch((err) => console.log(err));
+    }
+  }, [isLoggedIn])
+
+  React.useEffect(() => {
     const closeByEscape = (e) => {
       if (e.key === 'Escape') {
         closePopups();

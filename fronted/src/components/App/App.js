@@ -259,21 +259,21 @@ function App(props) {
           />
       }
       <InfoTooltip handleRedirect={handleOpenPopupSignin} isOpen={isInfoPopupOpened} onClose={closePopups}/>
-        <PopupNav isLoggedIn={isLoggedIn} handleLogout={handleLogout} isOpen={isPopupNavOpen} onClose={closePopups} handleOpenPopupSignup={handleOpenPopupSignup}/>
+        <PopupNav isLoggedIn={isLoggedIn} handleLogout={handleLogout} isOpen={isPopupNavOpen} onClose={closePopups} handleOpenPopupSignin={handleOpenPopupSignin}/>
         <Switch>
         <Route exact path='/'>
             <div className='upper-container'>
-              <Header handleLogout={handleLogout} isSavedNews={false} isLoggedIn={isLoggedIn} isPopup={false} handleOpenPopupNav={handleOpenPopupNav} handleOpenPopupSignup={handleOpenPopupSignup}/>
+              <Header handleLogout={handleLogout} isSavedNews={false} isLoggedIn={isLoggedIn} isPopup={false} handleOpenPopupNav={handleOpenPopupNav} handleOpenPopupSignin={handleOpenPopupSignin}/>
               <h2 className='upper-container__heading'>What's going on in the world?</h2>
               <p className='upper-container__subtitle'>Find the latest news on any topic and save them in your personal account.</p>
               <SearchForm  handleSubmit={handleSearchSubmit} isLoggedIn={isLoggedIn}/>
             </div>
             <Preloader searchError={searchError} isSearching={isSearching} notFound={notFound}/>
-            {cardsToRender && <NewsCardsList handleOpenPopupSignup={handleOpenPopupSignup} handleDeleteArticle={handleDeleteArticle} handleSaveArticle={handleSaveArticle} keyword={keyword} isSavedNews={false} isLoggedIn={isLoggedIn} handleShowMore={showMoreCards} nCardsToRender={nCardsToRender} cardsToRender={cardsToRender} savedArticles={savedArticles}/>}
+            {cardsToRender && <NewsCardsList handleOpenPopupSignin={handleOpenPopupSignin} handleDeleteArticle={handleDeleteArticle} handleSaveArticle={handleSaveArticle} keyword={keyword} isSavedNews={false} isLoggedIn={isLoggedIn} handleShowMore={showMoreCards} nCardsToRender={nCardsToRender} cardsToRender={cardsToRender} savedArticles={savedArticles}/>}
             <AboutAuthor/>
             <Footer/>
           </Route>
-          <ProtectedRoute handleOpenPopupSignin={handleOpenPopupSignin} isLoading={isLoading} handleOpenPopupSignup={handleOpenPopupSignup} loggedIn={isLoggedIn} path='/saved-news'>
+          <ProtectedRoute handleOpenPopupSignin={handleOpenPopupSignin} isLoading={isLoading} loggedIn={isLoggedIn} path='/saved-news'>
             <Header handleLogout={handleLogout} isLoggedIn={isLoggedIn} isSavedNews={true} isPopup={false} handleOpenPopupNav={handleOpenPopupNav}/>
             <SavedNewsHeader keyword={keyword} savedArticles={savedArticles}/>
             {savedArticles.length > 0 && <NewsCardsList handleDeleteArticle={handleDeleteArticle} isSavedNews={true} handleShowMore={showMoreCards} nCardsToRender={nCardsToRender} cardsToRender={savedArticles}/>}

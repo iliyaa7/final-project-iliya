@@ -24,11 +24,14 @@ function Nav(props) {
     return () => window.removeEventListener('resize', updatePredicate);
   },[])
 
+  //nav bar that displayed as a popup in '/' and '/saved-news' routes (mobile)
+  //the '/' route nav bar have aditional display for the not logged in user (!props.isLoggedin)
+  //rendered from  as a child of PopupNav
   if (props.isPopup) {
     return (
       <nav className='popup__nav-holder'>
         <Link className='header__white-navigation-button' onClick={props.onClose} to='/'>Home</Link>
-        {!props.isLoggedIn && <button type='button' onClick={props.handleOpenPopupSignup} className='header__signin-button header__signin-button_type_nav'>Sign in</button>}
+        {!props.isLoggedIn && <button type='button' onClick={props.handleOpenPopupSignin} className='header__signin-button header__signin-button_type_nav'>Sign in</button>}
         {props.isLoggedIn && <Link className='header__white-navigation-button' to='/saved-news' onClick={props.onClose}>Saved articles</Link>}
         {props.isLoggedIn &&
         <button onClick={props.handleLogout} type='button' className='header__logout-button header__signin-button_type_nav'>
@@ -37,6 +40,9 @@ function Nav(props) {
         </button>}
       </nav>
     )
+
+  //nav bar that displayed in '/saved-news' route (desktop)
+  //in mobile display there is a button instead of the bar - className 'header__menu-button)
   } else if (props.isSavedNews) {
     return (
       <nav className='header__nav'>
@@ -52,11 +58,13 @@ function Nav(props) {
     )
   }
 
+  //nav bar that displayed in '/' route (desktop). the display is different for users that are not logged in (!props.isLoggedin)
+  //in mobile display there is a button instead of the bar - className 'header__menu-button)
   return (
     <nav className='header__nav'>
       {isDesktop && <Link to='/' className='header__white-navigation-button header__white-navigation-button_active'>Home</Link>}
       {(isDesktop && props.isLoggedIn) && <Link className='header__white-navigation-button' to='/saved-news'>Saved articles</Link>}
-      {isDesktop ?  !props.isLoggedIn && <button type='button' onClick={props.handleOpenPopupSignup} className='header__signin-button'>Sign in</button> : <button className='header__menu-button'><img src={menuPath} onClick={props.handleOpenPopupNav} alt='menu'/></button>}
+      {isDesktop ?  !props.isLoggedIn && <button type='button' onClick={props.handleOpenPopupSignin} className='header__signin-button'>Sign in</button> : <button className='header__menu-button'><img src={menuPath} onClick={props.handleOpenPopupNav} alt='menu'/></button>}
       {(isDesktop && props.isLoggedIn) &&
       <button onClick={props.handleLogout} type='button' className='header__logout-button'>
         {currentUser.name}

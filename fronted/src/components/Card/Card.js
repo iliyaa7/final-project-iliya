@@ -30,7 +30,7 @@ function Card(props) {
 
   function handleFavoriteClick() {
     if (!props.isLoggedIn) {
-      return props.handleOpenPopupSignup();
+      return props.handleOpenPopupSignin();
     } else if(!isBtnClick) {
       props.handleSaveArticle(article, cardRef);
       setIsBtnClick(true)

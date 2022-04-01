@@ -64,7 +64,7 @@ class Api {
 
 }
 const savedNewsApi = new Api({
-  baseUrl: "https://api.iliyaa7-final-project.students.nomoreparties.sbs"
+  baseUrl: "https://api.igfs.online"
 });
 
 export default savedNewsApi

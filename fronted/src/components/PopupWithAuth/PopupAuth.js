@@ -17,7 +17,6 @@ function PopupAuth(props) {
   //Just in case there is an auto fill of the input feilds, when opening the form.
   React.useEffect(() => {
     setIsValid(inputRef.current.closest('form').checkValidity());
-    console.log(values)
   },[setIsValid, values]);
 
 

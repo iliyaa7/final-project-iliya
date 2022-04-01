@@ -2,8 +2,7 @@ import React from 'react';
 import { Switch, Route } from 'react-router';
 import '../../index.css';
 import './App.css'
-import { Provider, useDispatch } from 'react-redux'
-import store from '../../store'
+import { useDispatch } from 'react-redux'
 import Header from '../Header/Header'
 import SearchForm from '../SearchForm/SearchForm';
 import PopupNav from '../PopupNav/PopupNav';
@@ -66,7 +65,7 @@ function App(props) {
       setIsLoading(false);
     }
     onLoad();
-  }, [])
+  }, [dispatch])
 
   React.useEffect(() => {
     const closeByEscape = (e) => {
@@ -127,7 +126,6 @@ function App(props) {
     resetAuthErrors();
     savedNewsApi.signup(UserData)
     .then((res) => {
-      console.log(res);
       setIsPopupSignupOpen(false);
       setIstInfoPopupOpened(true);
     })

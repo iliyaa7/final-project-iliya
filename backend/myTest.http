@@ -1,4 +1,4 @@
-post https://api.iliyaa7-final-project.students.nomoreparties.sbs/signup
+post http://50.19.53.207/signup
 Content-Type: application/json
 
 {
@@ -9,28 +9,28 @@ Content-Type: application/json
 
 ###
 
-post http://localhost:3000/signin
+post http://50.19.53.207/signin
 Content-Type: application/json
 
 {
-  "email": "iliyaa7@gmail.com",
+  "email": "adfaah7@gmail.com",
   "password": "5792"
 }
 
 ###
 
-get http://localhost:3000/articles
-Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2MjBhZjg1MmQxNGFmM2I1ZGViYTI4YTIiLCJpYXQiOjE2NDUxNDMzNTgsImV4cCI6MTY0NTc0ODE1OH0.-pwcGSOIIUhU-V5cDXG9pVM35NirYQYPbOhgj7If5sk
+get http://50.19.53.207/articles
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2MjQ0NjEwMDY4ZmEzZDFkYjFmYjA2MzQiLCJpYXQiOjE2NDg2NDg0NjIsImV4cCI6MTY0OTI1MzI2Mn0.7ScKRTjkKS416fPds6wySLNyFkCAWO4eF3rHjIfS6gE
 
 ###
 
-post http://localhost:3000/articles
+post http://50.19.53.207/articles
 Content-Type: application/json
-Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2MjBhZjg1MmQxNGFmM2I1ZGViYTI4YTIiLCJpYXQiOjE2NDYwMDAxNzgsImV4cCI6MTY0NjYwNDk3OH0.Hjd0B2l304WXvycQjzQoJAEhFRUDs2O5b9WqMBj47fM
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2MjQ0NjEwMDY4ZmEzZDFkYjFmYjA2MzQiLCJpYXQiOjE2NDg2NDg0NjIsImV4cCI6MTY0OTI1MzI2Mn0.7ScKRTjkKS416fPds6wySLNyFkCAWO4eF3rHjIfS6gE
 
 {
-  "keyword": "sadddd",
-  "title": "israel",
+  "keyword": "saasddd",
+  "title": "israasddasd",
   "text": "israel",
   "date": "israel",
   "source": "israel",
@@ -39,13 +39,13 @@ Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2MjBhZjg1M
 }
 ###
 
-delete http://localhost:3000/articles/620e9cc61dd16d8857f2314
+delete http://50.19.53.207/articles/620e9cc61dd16d8857f2314
 Authorization: Bearer yJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2MjBiYWI1OGQ4Yjg1ZGIzNzBiNGVjMTIiLCJpYXQiOjE2NDUxMjQ3NTksImV4cCI6MTY0NTcyOTU1OX0.Vwop4VI5UlOv9b5sV5u-LlLeDI4YM8RiDNL9ihNMcXg
 
 ###
 
 
-get http://localhost:3000/users/me
+get http://50.19.53.207/users/me
 Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2MjBiMWU4OGM3NzdjZmM4ZjBkNmQ4YjYiLCJpYXQiOjE2NDQ4OTY3MjgsImV4cCI6MTY0NTUwMTUyOH0.4iYJRsE1R7xtLXgo2gyKvKsBGOAYepRn6SyWjTWbZ5U
 
 ###

@@ -19,7 +19,8 @@
     "build": "react-scripts build",
     "test": "react-scripts test",
     "eject": "react-scripts eject",
-    "deploy": "npm run build && scp -r ./build/* iliyaa7@iliyaa7-final-project.students.nomoreparties.sbs:/home/iliyaa7/frontend"
+
+    "deploy": "npm run build && scp -r -i aws.pem ./build/* ubuntu@3.83.64.211:/home/ubuntu/final-project-iliya/frontend"
   },
   "eslintConfig": {
     "extends": [

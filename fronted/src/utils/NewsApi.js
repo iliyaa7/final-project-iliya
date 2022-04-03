@@ -1,6 +1,6 @@
 import fetchFunction from "./fetchFunction";
 
-const apiKey = '09ba7cc1b3a942999110a5f35d31588a';
+const apiKey = 'e367980fbbbf487ebaa25f521901574a';
 
 const date = new Date();
 const last = new Date(date.getTime() - 7 * 24 * 60 * 60 * 1000);

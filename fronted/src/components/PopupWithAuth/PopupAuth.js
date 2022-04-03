@@ -2,6 +2,7 @@ import React from 'react';
 import PopupWithForm from '../PopupWithForm/PopupWithForm';
 import './PopupAuth.css'
 import useFormAndValidation from '../../utils/Validation'
+import loadingPath from '../../images/Ellipse.png'
 
 function PopupAuth(props) {
   const inputRef = React.useRef();
@@ -58,7 +59,10 @@ function PopupAuth(props) {
       {props.isRegister && <input className={`popup__form-input ${errors.name && 'popup__form-input_type_error'}`} id='name' name='name' onChange={handleChange} placeholder='Enter your username' value={values.name || ''} type='text' minLength='2' maxLength='40' required noValidate></input>}
       {props.isRegister && <span className='popup__form-input-error' id='name-error'>{errors.name}</span>}
       <span className='popup__form-input-error' id='submit-error'>{submitSignupErrMessage()}</span>
-      <button type='submit' className={`popup__save-button ${!isValid && 'popup__save-button_disabled'}`}>{props.submitBtnTitle}</button>
+      <button type='submit' className={`popup__save-button ${(props.isLoading || !isValid) && 'popup__save-button_disabled'}`}>
+        {(props.isLoading && 'loading') || props.submitBtnTitle}
+        {props.isLoading && <img src={loadingPath} alt='loading anomation' className='popup__loading rotation' />}
+      </button>
       <button type='button' onClick={props.handleRedirect} className='popup__redirect-button'>{'or '}<b className='popup__highlighted-text'>{props.redirectBtn}</b></button>
     </PopupWithForm>
   );

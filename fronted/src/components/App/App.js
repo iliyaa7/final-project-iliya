@@ -91,38 +91,39 @@ function App(props) {
     return () => document.removeEventListener('keydown', closeByEscape)
   }, [isOpen])
 
-  React.useEffect(() => {
-    const closeByOverlayClick = (e) => {
-      if (e.target.classList.contains('popup_opened')) {
-        closePopups();
-      }
-    }
-    if (isOpen) {
-      document.addEventListener('click', closeByOverlayClick)
-    }
+  //Clone upon clicking the overlay - find a way to improve and how to cancle on load
 
-    return () => document.removeEventListener('click', closeByOverlayClick)
-  }, [isOpen])
+  // React.useEffect(() => {
+  //   const closeByOverlayClick = (e) => {
+  //     if (e.target.classList.contains('popup_opened')) {
+  //       closePopups();
+  //     }
+  //   }
+  //   if (isOpen) {
+  //     document.addEventListener('click', closeByOverlayClick)
+  //   }
+
+  //   return () => document.removeEventListener('click', closeByOverlayClick)
+  // }, [isOpen])
 
 
 
   function handleSignin(newUserData) {
     resetAuthErrors();
+    setIsLoading(true);
     savedNewsApi.signin(newUserData)
-    .then((res) => {
-      localStorage.setItem('token', res.token);
-    })
+    .then((res) => localStorage.setItem('token', res.token))
     .then(() => {
       savedNewsApi.getUserInfo(localStorage.getItem('token')).then((res) => {
         dispatch(changeCurrentUser(res));
         setIsLoggedIn(true);
-        setIsPopupSigninOpen(false)
       })
     })
     .then(() => {
-      savedNewsApi.getArticles(localStorage.getItem('token'))
-      .then((res) => setSavedArticles(res))
+      setIsPopupSigninOpen(false)
+      return savedNewsApi.getArticles(localStorage.getItem('token'))
     })
+    .then((res) => setSavedArticles(res))
     .catch((err) => {
       if (err.message.includes(401)) {
         setIsIncorrectError(true);
@@ -130,11 +131,13 @@ function App(props) {
         setServerAuthError(true);
       }
       console.log(err)
-    });
+    })
+    .finally(() => setIsLoading(false));
   }
 
   function handleRegister(UserData) {
     resetAuthErrors();
+    setIsLoading(true);
     savedNewsApi.signup(UserData)
     .then((res) => {
       setIsPopupSignupOpen(false);
@@ -147,7 +150,8 @@ function App(props) {
         setServerAuthError(true);
       }
       console.log(err)
-    });
+    })
+    .finally(() => setIsLoading(false));
   }
 
   function resetAuthErrors() {
@@ -206,11 +210,13 @@ function App(props) {
 
   function handleOpenPopupSignin() {
     closePopups();
+    resetAuthErrors();
     setIsPopupSigninOpen(true);
   }
 
   function handleOpenPopupSignup() {
     closePopups();
+    resetAuthErrors();
     setIsPopupSignupOpen(true);
   }
 
@@ -251,6 +257,7 @@ function App(props) {
             isRegister={false}
             redirectBtn={'Sign up'}
             handleRedirect={handleOpenPopupSignup}
+            isLoading={isLoading}
           />
       }
       {
@@ -267,6 +274,7 @@ function App(props) {
             isRegister={true}
             redirectBtn={'Sign in'}
             handleRedirect={handleOpenPopupSignin}
+            isLoading={isLoading}
           />
       }
       <InfoTooltip handleRedirect={handleOpenPopupSignin} isOpen={isInfoPopupOpened} onClose={closePopups}/>

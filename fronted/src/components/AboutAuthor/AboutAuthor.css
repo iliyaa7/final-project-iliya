@@ -9,11 +9,12 @@
 .about__image {
   width: 464px;
   height: 464px;
-  border-radius: 1000px;
+  border-radius: 80%;
   margin: 5.55% 56px 0 7.22%;
-  background-image: url('../../images/image-03.png');
+  background-image: url('../../images/iliyaa-removebg-preview.jpg');
   background-repeat: no-repeat;
-  background-size: contain;
+  background-size: cover;
+  background-position: center;
 }
 
 .about__text-container {
@@ -41,6 +42,13 @@
   margin: 24px 0 0;
 }
 
+@media only screen and (max-width: 1130px){
+  .about__image {
+    border-radius: 15%;
+  }
+}
+
+
 
 
 @media only screen and (max-width: 768px){
@@ -55,6 +63,7 @@
     max-width: 232px;
     max-height: 232px;
     margin: 7.94% 32px 0 5.2%;
+    border-radius: 80%;
   }
 
   .about__text-container {

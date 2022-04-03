@@ -6,15 +6,10 @@ import useFormAndValidation from '../../utils/Validation'
 function PopupAuth(props) {
   const inputRef = React.useRef();
 
-  //I chose not to use reset.
-  //I think that it works beacuse my forms are unmounted when closing them or submiting the form
-
   const {
     values, handleChange, errors, isValid, setIsValid,
   } = useFormAndValidation();
 
-
-  //Just in case there is an auto fill of the input feilds, when opening the form.
   React.useEffect(() => {
     setIsValid(inputRef.current.closest('form').checkValidity());
   },[setIsValid, values]);
@@ -54,7 +49,7 @@ function PopupAuth(props) {
   return (
     <PopupWithForm isValidatedForm={props.isValidatedForm} isOpen={props.isOpen} onClose={props.onClose} title={props.title} handleSubmit={handleSubmit}>
       <label className='popup__input-title' >Email</label>
-      <input ref={inputRef} className={`popup__form-input ${errors.email && 'popup__form-input_type_error'}`} name='email' id='email' onChange={handleChange} placeholder='Enter email' value={values.email || ''} type='email' minLength='4' maxLength='40' required noValidate></input>
+      <input ref={inputRef} className={`popup__form-input ${errors.email && 'popup__form-input_type_error'}`} name='email' id='email' onChange={handleChange} placeholder='Enter email' value={values.email || ''} type='email' minLength='5' maxLength='40' required noValidate pattern='[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,}$'></input>
       <span className='popup__form-input-error' id='email-error'>{errors.email}</span>
       <label className='popup__input-title' >Password</label>
       <input className={`popup__form-input ${errors.password && 'popup__form-input_type_error'}`} name='password' id='password' onChange={handleChange} placeholder='Enter password' value={values.password || ''} type='password' minLength='4' maxLength='40' required noValidate></input>

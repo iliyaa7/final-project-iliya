@@ -1,5 +1,24 @@
 @import url('../PopupWithForm/PopupWithForm.css');
 
+@keyframes rotation {
+  0% {
+   transform: rotate(0deg);
+  }
+  100% {
+   transform: rotate(360deg);
+  }
+ }
+
+ .rotation{
+  animation: rotation 2s linear infinite;
+}
+
+.popup__loading {
+  width: 30px;
+  height: 30px;
+  margin: 0 0 0 10px;
+}
+
 .popup__input-title {
   font-family: Inter, sans-serif, serif;
   font-style: normal;

@@ -5,7 +5,6 @@ function ProtectedRoute({ children, loggedIn, isLoading, ...props }) {
   if (isLoading) {
     return ('')
   }
-  !loggedIn && props.handleOpenPopupSignin()
   return (
     <Route exact {...props}>
       {loggedIn ? children : <Redirect to={"/"} />}

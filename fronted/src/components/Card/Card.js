@@ -15,7 +15,6 @@ function Card(props) {
   }, [props.isSavedNews, props.isLoggedIn, props.savedArticles, props.card.url])
 
 
-
   const article = {
    title: props.card.title,
    text: props.card.description || props.card.text,
@@ -33,7 +32,7 @@ function Card(props) {
       return props.handleOpenPopupSignin();
     } else if(!isBtnClick) {
       props.handleSaveArticle(article, cardRef);
-      setIsBtnClick(true)
+      setIsBtnClick(true);
     } else {
       props.savedArticles.forEach((article) => {
         if (article.link === props.card.url) {

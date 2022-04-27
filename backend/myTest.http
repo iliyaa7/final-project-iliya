@@ -1,0 +1,51 @@
+post http://50.19.53.207/signup
+Content-Type: application/json
+
+{
+  "email": "adfaah7@gmail.com",
+  "password": "5792",
+  "name": "hdf"
+}
+
+###
+
+post http://50.19.53.207/signin
+Content-Type: application/json
+
+{
+  "email": "adfaah7@gmail.com",
+  "password": "5792"
+}
+
+###
+
+get http://50.19.53.207/articles
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2MjQ0NjEwMDY4ZmEzZDFkYjFmYjA2MzQiLCJpYXQiOjE2NDg2NDg0NjIsImV4cCI6MTY0OTI1MzI2Mn0.7ScKRTjkKS416fPds6wySLNyFkCAWO4eF3rHjIfS6gE
+
+###
+
+post http://50.19.53.207/articles
+Content-Type: application/json
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2MjQ0NjEwMDY4ZmEzZDFkYjFmYjA2MzQiLCJpYXQiOjE2NDg2NDg0NjIsImV4cCI6MTY0OTI1MzI2Mn0.7ScKRTjkKS416fPds6wySLNyFkCAWO4eF3rHjIfS6gE
+
+{
+  "keyword": "saasddd",
+  "title": "israasddasd",
+  "text": "israel",
+  "date": "israel",
+  "source": "israel",
+  "link": "https://www.idnes.cz/zlin/zpravy/turistika-cile-zajimavosti-pocty-navstevniku-zoo-skanzen.A220224_652380_zlin-zpravy_ppr",
+  "image": "https://upload.wikimedia.org/wikipedia/commons/a/a3/Image-not-found.png"
+}
+###
+
+delete http://50.19.53.207/articles/620e9cc61dd16d8857f2314
+Authorization: Bearer yJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2MjBiYWI1OGQ4Yjg1ZGIzNzBiNGVjMTIiLCJpYXQiOjE2NDUxMjQ3NTksImV4cCI6MTY0NTcyOTU1OX0.Vwop4VI5UlOv9b5sV5u-LlLeDI4YM8RiDNL9ihNMcXg
+
+###
+
+
+get http://50.19.53.207/users/me
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2MjBiMWU4OGM3NzdjZmM4ZjBkNmQ4YjYiLCJpYXQiOjE2NDQ4OTY3MjgsImV4cCI6MTY0NTUwMTUyOH0.4iYJRsE1R7xtLXgo2gyKvKsBGOAYepRn6SyWjTWbZ5U
+
+###
